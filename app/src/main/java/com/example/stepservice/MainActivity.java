@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toggle.setOnClickListener(this);
     }
 
+    //버튼 눌렀을때 서비스 시작
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -54,8 +55,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //필요없으면 삭제가능
     //텍스트뷰
     public void setTextView(String text){Step_Text.setText(text);}
+
+    //필요없으면 삭제가능
     //토스트
     public void  setToast(String msg){
         Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
@@ -74,10 +78,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //비콘 서비스 종료
     public void End_BeaconService(){
+        //확인용임 필요없으면 삭제가능
         setTextView("Hello Step");
+
+        //꼭필요한 부분
         //Beacon_Condition = "TurnOff";
         Intent intent = new Intent(this, MyStepService.class);
         stopService(intent);
+
+        //필요없으면 삭제가능
         setTextView("걸음수 : "+ Total_Step);
     }
 
@@ -87,12 +96,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onReceive(Context arg0, Intent arg1) {
             // TODO Auto-generated method stub
             DataFromService = arg1.getIntExtra("ServiceData",0 );
+
+            //필요없으면 삭제가능
             //UI에 표시하는 부분 여기에 입력하면 됨 _ 현재 접속된 비콘 이름 출력
             Total_Step = DataFromService;
             set_UI();
         }
     }
 
+
+    //필요없으면 삭제가능
     //서비스에서 가져온 데이터 UI에 표시
     public void set_UI(){
         setToast("걸음수 : "+DataFromService);
